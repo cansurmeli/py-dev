@@ -1,0 +1,13 @@
+version: "3.3"
+
+services:
+  python:
+    build: .
+    container_name: python-dev-env
+    volumes:
+      - type: bind
+        source: "$PWD/../"
+        target: /app
+    stdin_open: true
+    tty: true
+    command: sh
