@@ -3,10 +3,10 @@ version: "3.3"
 services:
   python:
     build: .
-    container_name: python-dev-env
+    container_name: py-dev
     volumes:
       - type: bind
-        source: "$PWD/../"
+        source: "$PWD/../code"
         target: /app
     stdin_open: true
     tty: true
