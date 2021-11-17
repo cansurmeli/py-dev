@@ -25,28 +25,20 @@ RUN pip3 install --user -r /app/requirements.txt
 # https://nlknguyen.wordpress.com/2016/06/03/vim-tip-fix-plugin-loading-error-not-an-editor-command-m/
 RUN git config --global core.autocrlf input
 
-# TEMPORARY
-# Currently, there is an issue with cloning my Gitlab repo
-# Probably due to the fact that this is a slim installation
-#		that necessary stuff isn't there.
-RUN git config --global http.sslverify false
-
-RUN git clone https://gitlab.cansurmeli.com/can/vim-config /home/python/.vim
-
-#SHELL ["/usr/bin/zsh"]
-
-RUN git clone --recursive https://github.com/sorin-ionescu/prezto.git /home/python/.zprezto
-
 USER root
 
-COPY init_zsh.sh .
+# Switch the default shell to Zshell
+RUN chsh -s  "$(which zsh)"
 
-RUN chmod +x init_zsh.sh
+# Install Zprezto
+COPY init_zprezto.sh .
 
-#RUN ./init_zsh.sh
+RUN chmod +x init_zprezto.sh
 
-# Make Zsh the default shell
-RUN chsh -s /bin/zsh
+RUN ./init_zprezto.sh
+
+# Grab my Vim config
+RUN git clone https://gitlab.cansurmeli.com/can/vim-config /home/python/.vim
 
 USER python
 
