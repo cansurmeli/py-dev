@@ -23,23 +23,25 @@ RUN pip3 install --user -r /app/requirements.txt
 # To handle a stupid issue related to Git cloning when
 #		installing Vim plugins. Detailed in the URL:
 # https://nlknguyen.wordpress.com/2016/06/03/vim-tip-fix-plugin-loading-error-not-an-editor-command-m/
-RUN git config --global core.autocrlf input
+#RUN git config --global core.autocrlf true
 
 USER root
 
 # Switch the default shell to Zshell
-RUN chsh -s  "$(which zsh)"
+RUN chsh -s "$(which zsh)"
 
 # Install Zprezto
 COPY init_zprezto.sh .
 
 RUN chmod +x init_zprezto.sh
 
+USER python
+
+RUN rm /home/python/.zshrc
+
 RUN ./init_zprezto.sh
 
 # Grab my Vim config
 RUN git clone https://gitlab.cansurmeli.com/can/vim-config /home/python/.vim
-
-USER python
 
 WORKDIR /app

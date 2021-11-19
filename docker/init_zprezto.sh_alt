@@ -1,0 +1,8 @@
+zsh <<'EOF'
+git clone --recursive https://github.com/sorin-ionescu/prezto.git /home/python/.zprezto
+setopt EXTENDED_GLOB
+for rcfile in /home/python/.zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" /home/python/.${rcfile:t}"
+done
+EOF
+
