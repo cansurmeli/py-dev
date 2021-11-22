@@ -3,8 +3,10 @@ FROM centos:8
 WORKDIR /tmp
 
 RUN dnf update -y
-RUN dnf install -y git wget time ca-certificates zsh gcc ncurses-devel make python3 util-linux-user sudo
-RUN git clone https://github.com/vim/vim.git && cd vim && ./configure --enable-python3interp=yes && make && make install
+RUN dnf install -y git wget time ca-certificates zsh gcc ncurses-devel make util-linux-user sudo python39 python39-devel python39-setuptools python39-psutil
+
+# Grab Vim fron source instead and compile it with Python3 support
+RUN git clone https://github.com/vim/vim.git && cd vim && ./configure --enable-python3interp=yes --with-python3-config-dir=/usr/bin/python3.9/config-* && make && make install
 
 RUN useradd python
 
