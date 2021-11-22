@@ -10,4 +10,4 @@ services:
         target: /app
     stdin_open: true
     tty: true
-    command: sh
+    command: zsh

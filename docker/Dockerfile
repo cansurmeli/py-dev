@@ -3,8 +3,10 @@ FROM centos:8
 WORKDIR /tmp
 
 RUN dnf update -y
-RUN dnf install -y git wget time ca-certificates zsh gcc ncurses-devel make python3 util-linux-user sudo
-RUN git clone https://github.com/vim/vim.git && cd vim && ./configure --enable-python3interp=yes && make && make install
+RUN dnf install -y git wget time ca-certificates zsh gcc ncurses-devel make util-linux-user sudo python39 python39-devel python39-setuptools python39-psutil
+
+# Grab Vim fron source instead and compile it with Python3 support
+RUN git clone https://github.com/vim/vim.git && cd vim && ./configure --enable-python3interp=yes --with-python3-config-dir=/usr/bin/python3.9/config-* && make && make install
 
 RUN useradd python
 
@@ -19,11 +21,6 @@ RUN pip3 install --user pylint
 
 ADD ./requirements.txt /app/requirements.txt
 RUN pip3 install --user -r /app/requirements.txt
-
-# To handle a stupid issue related to Git cloning when
-#		installing Vim plugins. Detailed in the URL:
-# https://nlknguyen.wordpress.com/2016/06/03/vim-tip-fix-plugin-loading-error-not-an-editor-command-m/
-#RUN git config --global core.autocrlf true
 
 USER root
 
@@ -42,6 +39,6 @@ RUN rm /home/python/.zshrc
 RUN ./init_zprezto.sh
 
 # Grab my Vim config
-RUN git clone https://gitlab.cansurmeli.com/can/vim-config /home/python/.vim
+RUN git clone --recursive https://gitlab.cansurmeli.com/can/vim-config /home/python/.vim
 
 WORKDIR /app
