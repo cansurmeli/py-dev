@@ -1,9 +1,9 @@
 version: "3.3"
 
 services:
-  python:
+  thesis:
     build: .
-    container_name: py-dev
+    container_name: thesis
     volumes:
       - type: bind
         source: "$PWD/../code"
