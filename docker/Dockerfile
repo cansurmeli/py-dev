@@ -22,6 +22,10 @@ RUN pip3 install --user pylint
 ADD ./requirements.txt /app/requirements.txt
 RUN pip3 install --user -r /app/requirements.txt
 
+# I need the rich/colourful environment experience
+# Plus, it possibly solves a Prompt.app issue on iOS/iPadOS
+RUN export TERM="screen-256color"
+
 USER root
 
 # Switch the default shell to Zshell
