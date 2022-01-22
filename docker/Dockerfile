@@ -17,7 +17,6 @@ USER python
 WORKDIR /home/python
 
 RUN pip3 install --user --upgrade pip
-RUN pip3 install --user pylint
 
 ADD ./requirements.txt /app/requirements.txt
 RUN pip3 install --user -r /app/requirements.txt
