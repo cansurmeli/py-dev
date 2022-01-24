@@ -3,10 +3,10 @@ version: "3.3"
 services:
   thesis:
     build: .
-    container_name: thesis
+    container_name: [CONTAINER_NAME]]
     volumes:
       - type: bind
-        source: "$PWD/../code"
+        source: "$PWD/../../code"
         target: /app
     stdin_open: true
     tty: true
