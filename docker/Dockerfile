@@ -58,7 +58,7 @@ ENV TERM="screen-256color"
 
 #   Define the appropiate Python path so that the Python
 # import works properly
-ENV PYTHONPATH="/app/code/"
+ENV PYTHONPATH="$PYTHONPATH:/app/code/"
 
 # Basic aliases to avoid minor inconviences
 RUN echo 'alias pip=pip3' >> ~/.zshrc
