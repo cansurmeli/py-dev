@@ -6,7 +6,7 @@ services:
     container_name: [CONTAINER_NAME]
     volumes:
       - type: bind
-        source: "$PWD/../../code"
+        source: "$PWD/../../"
         target: /app
     stdin_open: true
     tty: true
