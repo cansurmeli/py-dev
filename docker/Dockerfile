@@ -54,7 +54,10 @@ RUN ./init_zprezto.sh
 ##################
 #   I need the rich/colourful environment experience
 # Plus, it possibly solves a Prompt.app issue on iOS/iPadOS
-ENV TERM="screen-256color"
+#
+#   Another option is `screen-256color` but the one with `xterm`
+# solves another issue with Vim colorscheme `onedark`.
+ENV TERM="xterm-256color"
 
 #   Define the appropiate Python path so that the Python
 # import works properly
